@@ -1,32 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NEXUS // The Future of Intelligence</title>
+  <title>Nexus Systems // Next-Gen Enterprise Infrastructure & AI</title>
+  <meta name="description" content="Nexus delivers enterprise-grade distributed computing, automated AI pipelines, and zero-trust cloud orchestration.">
   
-  <!-- Tailwind CSS & Google Fonts -->
+  <!-- Tailwind CSS & Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
             brand: {
-              cyan: '#00d2ff',
-              blue: '#0066ff',
+              50: '#f0f9ff',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
               dark: '#030712',
-              card: 'rgba(10, 20, 40, 0.65)'
+              card: 'rgba(15, 23, 42, 0.75)'
             }
           },
           fontFamily: {
-            orbitron: ['Orbitron', 'sans-serif'],
-            inter: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace']
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
           }
         }
       }
@@ -37,22 +37,25 @@
     body {
       background-color: #030712;
       color: #f3f4f6;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       overflow-x: hidden;
     }
-    .neon-text-glow {
-      text-shadow: 0 0 15px rgba(0, 210, 255, 0.6), 0 0 35px rgba(0, 102, 255, 0.4);
+    .glow-cyan {
+      box-shadow: 0 0 40px -10px rgba(14, 165, 233, 0.3);
     }
-    .neon-border-glow {
-      box-shadow: 0 0 25px rgba(0, 210, 255, 0.3), inset 0 0 15px rgba(0, 102, 255, 0.2);
+    .glass-nav {
+      background: rgba(3, 7, 18, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .glass-panel {
-      background: rgba(10, 18, 38, 0.7);
+    .glass-card {
+      background: rgba(15, 23, 42, 0.65);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(0, 210, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .glass-panel:hover {
-      border-color: rgba(0, 210, 255, 0.5);
+    .glass-card:hover {
+      border-color: rgba(56, 189, 248, 0.35);
+      transform: translateY(-2px);
     }
     canvas {
       position: fixed;
@@ -65,169 +68,202 @@
     }
   </style>
 </head>
-<body class="relative">
+<body class="relative selection:bg-brand-500 selection:text-white">
 
-  <!-- Interactive Background Canvas -->
-  <canvas id="bg-canvas"></canvas>
+  <!-- Network Canvas -->
+  <canvas id="neural-canvas"></canvas>
 
-  <div class="relative z-10">
+  <div class="relative z-10 flex flex-col min-h-screen">
 
     <!-- NAVBAR -->
-    <header class="w-full border-b border-cyan-500/20 glass-panel sticky top-0 z-50">
+    <header class="glass-nav sticky top-0 z-50 transition-all">
       <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        
-        <!-- Logo Brand -->
-        <a href="#" class="flex items-center gap-3 group">
-          <div class="relative w-11 h-11 flex items-center justify-center rounded-full border border-cyan-400 bg-cyan-950/40 neon-border-glow">
-            <!-- Mini SVG Logo -->
-            <svg class="w-6 h-6 text-cyan-400" viewBox="0 0 100 100" fill="none" stroke="currentColor">
-              <path d="M28 75 V25 L72 75 V25" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+        <a href="#" class="flex items-center gap-3">
+          <!-- Nexus Vector Logo -->
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-400 p-[1.5px] glow-cyan">
+            <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+              <svg class="w-5 h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="4 20 4 4 20 20 20 4"></polyline>
+              </svg>
+            </div>
           </div>
-          <span class="font-orbitron font-extrabold text-2xl tracking-widest text-white group-hover:text-cyan-400 transition-colors">
-            NEX<span class="text-cyan-400">US</span>
-          </span>
+          <span class="text-xl font-bold tracking-tight text-white">NEXUS<span class="text-brand-400">.</span></span>
         </a>
 
-        <!-- Desktop Navigation -->
-        <nav class="hidden md:flex items-center gap-8 font-mono text-sm text-gray-400">
-          <a href="#about" class="hover:text-cyan-400 transition">/ABOUT</a>
-          <a href="#solutions" class="hover:text-cyan-400 transition">/SYSTEMS</a>
-          <a href="#credentials" class="hover:text-cyan-400 transition">/FOUNDER_ID</a>
-          <a href="#contact" class="hover:text-cyan-400 transition">/TERMINAL</a>
+        <!-- Desktop Menu -->
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+          <a href="#solutions" class="hover:text-white transition">Solutions</a>
+          <a href="#platform" class="hover:text-white transition">Platform</a>
+          <a href="#infrastructure" class="hover:text-white transition">Infrastructure</a>
+          <a href="#about" class="hover:text-white transition">About</a>
         </nav>
 
-        <a href="#credentials" class="px-5 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider font-semibold bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-400/50 text-cyan-300 transition-all duration-300">
-          Executive Access
-        </a>
+        <div class="flex items-center gap-4">
+          <a href="#contact" class="hidden sm:inline-flex text-xs font-semibold px-4 py-2.5 rounded-lg border border-slate-700 hover:border-slate-500 text-slate-200 transition">
+            Sign In
+          </a>
+          <a href="#contact" class="text-xs font-semibold px-4 py-2.5 rounded-lg bg-brand-500 hover:bg-brand-400 text-slate-950 font-bold transition shadow-lg shadow-brand-500/20">
+            Request Demo
+          </a>
+        </div>
       </div>
     </header>
 
     <!-- HERO SECTION -->
-    <section class="max-w-7xl mx-auto px-6 pt-24 pb-20 flex flex-col items-center text-center">
-      
-      <!-- System Pill -->
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel text-cyan-400 font-mono text-xs tracking-wider mb-8">
-        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-        NEXUS KERNEL V4.0.9 // ONLINE
-      </div>
-
-      <!-- Main Headline -->
-      <h1 class="font-orbitron text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight text-white max-w-5xl">
-        Connecting The <br>
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-400 neon-text-glow">
-          Unconnected
-        </span>
-      </h1>
-
-      <p class="mt-6 text-gray-400 max-w-2xl text-base md:text-lg font-light leading-relaxed">
-        World-class decentralized intelligence, hyper-converged neural operations, and zero tax liability infrastructure.
-      </p>
-
-      <div class="mt-10 flex flex-wrap gap-4 justify-center">
-        <a href="#solutions" class="px-8 py-3.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black font-orbitron font-bold text-sm tracking-wider uppercase shadow-lg shadow-cyan-500/25 transition">
-          Explore Systems
-        </a>
-        <a href="#credentials" class="px-8 py-3.5 rounded-lg glass-panel hover:bg-white/5 border border-cyan-500/30 text-white font-mono text-sm tracking-wide transition">
-          View Founder Clearance
-        </a>
-      </div>
-
-      <!-- Stats Bar -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-4xl mt-20 pt-10 border-t border-cyan-500/20 font-mono text-left">
-        <div>
-          <p class="text-xs text-gray-500 uppercase">System Latency</p>
-          <p class="text-2xl font-bold text-cyan-400 mt-1">0.12 ms</p>
-        </div>
-        <div>
-          <p class="text-xs text-gray-500 uppercase">Valuation (Simulated)</p>
-          <p class="text-2xl font-bold text-white mt-1">$100M+</p>
-        </div>
-        <div>
-          <p class="text-xs text-gray-500 uppercase">Work Ratio</p>
-          <p class="text-2xl font-bold text-cyan-400 mt-1">0% Effort</p>
-        </div>
-        <div>
-          <p class="text-xs text-gray-500 uppercase">Tea Stall Access</p>
-          <p class="text-2xl font-bold text-emerald-400 mt-1">UNLIMITED</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOUNDER ID BADGE SECTION -->
-    <section id="credentials" class="max-w-7xl mx-auto px-6 py-20">
-      <div class="text-center mb-14">
-        <h2 class="font-orbitron text-3xl md:text-4xl font-bold tracking-wide text-white uppercase">
-          Founder Security Badge
-        </h2>
-        <p class="font-mono text-sm text-cyan-400/80 mt-2">// OMNIPRESENT LEVEL 10 CLEARANCE</p>
-      </div>
-
-      <!-- Realistic ID Card Mockup -->
-      <div class="max-w-sm mx-auto rounded-3xl p-6 glass-panel neon-border-glow border border-cyan-400/40 relative overflow-hidden bg-gradient-to-b from-slate-900/90 to-blue-950/80">
+    <main class="flex-grow">
+      <section class="max-w-7xl mx-auto px-6 pt-24 pb-20 text-center flex flex-col items-center">
         
-        <!-- ID Header -->
-        <div class="flex items-center justify-between pb-4 border-b border-cyan-500/20">
-          <div class="flex items-center gap-2">
-            <span class="font-orbitron font-extrabold text-lg text-white">NEXUS</span>
-          </div>
-          <span class="font-mono text-[10px] tracking-wider text-cyan-400 bg-cyan-950/80 px-2.5 py-1 rounded-full border border-cyan-500/30">
-            CHIP ACTIVE
+        <!-- Live System Status Badge -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-slate-800 bg-slate-900/80 text-xs font-medium text-slate-300 mb-8">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Nexus Cloud Fabric 3.2 is now active
+        </div>
+
+        <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-4xl leading-[1.1]">
+          Orchestrate intelligence at <br class="hidden sm:block">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-300">
+            unprecedented scale.
           </span>
+        </h1>
+
+        <p class="mt-6 text-slate-400 max-w-2xl text-lg font-normal leading-relaxed">
+          Nexus provides the foundational infrastructure for enterprise teams to deploy, secure, and scale distributed neural compute networks across hybrid environments.
+        </p>
+
+        <div class="mt-10 flex flex-wrap gap-4 justify-center">
+          <a href="#contact" class="px-7 py-3.5 rounded-xl bg-brand-500 hover:bg-brand-400 text-slate-950 font-bold text-sm tracking-wide transition shadow-xl shadow-brand-500/25">
+            Start Free Trial
+          </a>
+          <a href="#solutions" class="px-7 py-3.5 rounded-xl border border-slate-700 hover:bg-slate-800/60 text-slate-200 font-semibold text-sm transition">
+            View Documentation
+          </a>
         </div>
 
-        <!-- Photo & Title -->
-        <div class="mt-6 flex flex-col items-center text-center">
-          <div class="w-28 h-28 rounded-2xl border-2 border-cyan-400 p-1 relative shadow-lg shadow-cyan-500/20">
-            <img 
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" 
-              alt="CEO Portrait" 
-              class="w-full h-full object-cover rounded-xl filter contrast-125"
-            />
+        <!-- Real Telemetry Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-5xl mt-24 pt-12 border-t border-slate-800 text-left">
+          <div class="p-4 rounded-xl border border-slate-800/60 bg-slate-900/40">
+            <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">Uptime SLA</span>
+            <div class="text-2xl font-bold text-white mt-1">99.99%</div>
+            <p class="text-xs text-emerald-400 mt-1">Enterprise Guaranteed</p>
           </div>
-
-          <h3 class="font-orbitron text-xl font-bold text-white mt-4 tracking-wider">FOUNDER & CEO</h3>
-          <p class="font-mono text-xs text-cyan-400 mt-0.5">ID: NX-0001 // CLEARANCE: ALL</p>
-        </div>
-
-        <!-- Meta Details -->
-        <div class="mt-6 space-y-2 text-xs font-mono border-t border-cyan-500/20 pt-4 text-gray-300">
-          <div class="flex justify-between">
-            <span class="text-gray-500">DEPT:</span>
-            <span class="text-white">CORE FOUNDING</span>
+          <div class="p-4 rounded-xl border border-slate-800/60 bg-slate-900/40">
+            <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">Global Latency</span>
+            <div class="text-2xl font-bold text-white mt-1">&lt; 14ms</div>
+            <p class="text-xs text-slate-400 mt-1">Edge Nodes worldwide</p>
           </div>
-          <div class="flex justify-between">
-            <span class="text-gray-500">VALID THRU:</span>
-            <span class="text-emerald-400">FOREVER</span>
+          <div class="p-4 rounded-xl border border-slate-800/60 bg-slate-900/40">
+            <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">Security</span>
+            <div class="text-2xl font-bold text-white mt-1">SOC-2</div>
+            <p class="text-xs text-cyan-400 mt-1">Type II Certified Ready</p>
           </div>
-          <div class="flex justify-between">
-            <span class="text-gray-500">PERMIT:</span>
-            <span class="text-cyan-300">ALL AREAS (TEA STALL INCL.)</span>
+          <div class="p-4 rounded-xl border border-slate-800/60 bg-slate-900/40">
+            <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">Data Throughput</span>
+            <div class="text-2xl font-bold text-white mt-1">100 Gbps+</div>
+            <p class="text-xs text-slate-400 mt-1">Dedicated Backbone</p>
           </div>
         </div>
+      </section>
 
-        <!-- Barcode Graphic -->
-        <div class="mt-6 pt-3 border-t border-dashed border-cyan-500/30 flex justify-between items-center text-[10px] font-mono text-gray-500">
-          <span>01001110 01000101</span>
-          <span>100% SECURE</span>
+      <!-- ENTERPRISE SOLUTIONS -->
+      <section id="solutions" class="max-w-7xl mx-auto px-6 py-24 border-t border-slate-800/60">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <h2 class="text-xs font-mono uppercase tracking-widest text-brand-400 mb-3">Enterprise Core</h2>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-white">Engineered for mission-critical pipelines</h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <div class="glass-card p-8 rounded-2xl transition duration-300">
+            <div class="w-12 h-12 rounded-xl bg-sky-950 border border-sky-500/30 flex items-center justify-center text-brand-400 mb-6">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <h4 class="text-xl font-bold text-white mb-2">Distributed Compute</h4>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Dynamically schedule high-intensity inference and computational tasks across multi-cloud clusters with zero overhead.
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="glass-card p-8 rounded-2xl transition duration-300">
+            <div class="w-12 h-12 rounded-xl bg-indigo-950 border border-indigo-500/30 flex items-center justify-center text-indigo-400 mb-6">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            </div>
+            <h4 class="text-xl font-bold text-white mb-2">Zero-Trust Isolation</h4>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Every packet, API route, and container runs with cryptographic workload identity and micro-segmented perimeter defense.
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="glass-card p-8 rounded-2xl transition duration-300">
+            <div class="w-12 h-12 rounded-xl bg-teal-950 border border-teal-500/30 flex items-center justify-center text-teal-400 mb-6">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            </div>
+            <h4 class="text-xl font-bold text-white mb-2">Unified Telemetry</h4>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Gain millisecond-by-millisecond visibility across raw data ingress, compute nodes, and latency spikes with automated anomaly triage.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- REAL CONTACT / INQUIRY SECTION -->
+      <section id="contact" class="max-w-3xl mx-auto px-6 py-24">
+        <div class="glass-card p-8 md:p-12 rounded-3xl border border-slate-800">
+          <div class="text-center mb-8">
+            <h3 class="text-2xl md:text-3xl font-bold text-white">Get Early Access</h3>
+            <p class="text-slate-400 text-sm mt-2">Connect with our enterprise engineering team to deploy Nexus in your cloud.</p>
+          </div>
+
+          <form onsubmit="event.preventDefault(); alert('Inquiry received! Our team will contact you shortly.');" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-medium text-slate-400 mb-1">Your Name</label>
+                <input type="text" required placeholder="John Doe" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-4 py-2.5 text-white text-sm focus:border-brand-500 focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-400 mb-1">Work Email</label>
+                <input type="email" required placeholder="john@company.com" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-4 py-2.5 text-white text-sm focus:border-brand-500 focus:outline-none">
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-400 mb-1">Company / Project Name</label>
+              <input type="text" required placeholder="Enterprise Corp" class="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-4 py-2.5 text-white text-sm focus:border-brand-500 focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-400 mb-1">Requirements</label>
+              <textarea rows="3" placeholder="Tell us about your infrastructure or compute needs..." class="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-4 py-2.5 text-white text-sm focus:border-brand-500 focus:outline-none"></textarea>
+            </div>
+            <button type="submit" class="w-full py-3 rounded-lg bg-brand-500 hover:bg-brand-400 text-slate-950 font-bold text-sm tracking-wide transition shadow-lg shadow-brand-500/20">
+              Submit Request
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- PROFESSIONAL FOOTER -->
+    <footer class="border-t border-slate-800/80 py-12 glass-nav">
+      <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-slate-500 font-mono">
+        <div>
+          © 2026 Nexus Systems Technologies Inc. All rights reserved.
+        </div>
+        <div class="flex gap-6 text-xs">
+          <a href="#" class="hover:text-slate-300">Privacy Policy</a>
+          <a href="#" class="hover:text-slate-300">Terms of Service</a>
+          <a href="#" class="hover:text-slate-300">Security</a>
+          <a href="#" class="hover:text-slate-300">Compliance</a>
         </div>
       </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="border-t border-cyan-500/20 py-10 mt-16 glass-panel font-mono text-xs text-gray-500 text-center">
-      <p>© 2026 NEXUS CORP. ALL RIGHTS RESERVED // "NO WORK, JUST CONNECTING"</p>
     </footer>
 
   </div>
 
-  <!-- INTERACTIVE CANVAS SCRIPT -->
+  <!-- Subtle Ambient Particle System -->
   <script>
-    const canvas = document.getElementById('bg-canvas');
+    const canvas = document.getElementById('neural-canvas');
     const ctx = canvas.getContext('2d');
-
-    let width, height;
-    let particles = [];
+    let width, height, particles = [];
 
     function resize() {
       width = canvas.width = window.innerWidth;
@@ -236,63 +272,45 @@
     window.addEventListener('resize', resize);
     resize();
 
-    class Particle {
-      constructor() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.8;
-        this.vy = (Math.random() - 0.5) * 0.8;
-        this.radius = Math.random() * 1.5 + 1;
-      }
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        if (this.x < 0 || this.x > width) this.vx *= -1;
-        if (this.y < 0 || this.y > height) this.vy *= -1;
-      }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = '#00d2ff';
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = '#0066ff';
-        ctx.fill();
-      }
+    for (let i = 0; i < 40; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 1.5 + 0.5
+      });
     }
 
-    for (let i = 0; i < 50; i++) {
-      particles.push(new Particle());
-    }
-
-    function animate() {
+    function render() {
       ctx.clearRect(0, 0, width, height);
-
-      // Connect lines
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 130) {
+          if (dist < 120) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(0, 210, 255, ${0.25 - dist / 520})`;
-            ctx.lineWidth = 0.8;
+            ctx.strokeStyle = `rgba(14, 165, 233, ${0.15 - dist / 800})`;
+            ctx.lineWidth = 0.6;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.stroke();
           }
         }
       }
-
       particles.forEach(p => {
-        p.update();
-        p.draw();
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.5)';
+        ctx.fill();
       });
-
-      requestAnimationFrame(oanimate);
+      requestAnimationFrame(render);
     }
-    animate();
+    render();
   </script>
 </body>
 </html>
